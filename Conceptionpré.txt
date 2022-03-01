@@ -1,0 +1,32 @@
+Règles du jeu:
+
+Le principe est simple, 2 joueurs possèdent 4 troupes chacuns et doivent éliminer les troupes adverses.
+
+Les différentes troupes:
+- Chevalier (peut parcourir une distance plus         grande que les autres troupes)
+- Archer (distance d'attaque plus élevé mais moins     de pv)
+- Epéiste (possède une attack plus élevé au corps à corps)
+- Bateau (que dans les rivières, peut attaquer à la    même distance que les archers, déplacement maritime egal à celui d'un cavalier sur terre)
+
+
+Le terrain se fait sur une génération de map aléatoire et qui suit une certaine logique par rapport aux 4 différents environnements qu'elle possède: 
+
+        - Foret (donne un bonus de portée d'attaque           aux archers)
+        - Marécage (donne un malus de mouvements              aux troupes)
+        - Rivière (le transport se fait qu'en                 bateau)
+        - Plaine (à compléter)
+
+1) Début:
+
+Les deux joueurs possèdent 4 troupes chacuns (troupes à préciser).
+Chaque joueur commence dans deux cotés opposés de la carte
+
+2) Règles d'avancement:
+
+Le jeu fonctionne en tour par tour. Chaque joueur peut soit déplacer ses troupes ou attaquer avec, elles ne peuvent pas faire les deux en même temps
+
+(système d'argent à voir)
+
+3) Fin:
+
+Le jeu se termine quand un des deux camps ne possède plus de troupes et il peut y avoir une possibilité de match nul, quand les deux dernières troupes s'entretuent
