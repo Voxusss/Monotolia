@@ -11,7 +11,7 @@ Les différentes troupes:
 
 Le terrain se fait sur une génération de map aléatoire et qui suit une certaine logique par rapport aux 4 différents environnements qu'elle possède: 
 
-        - Foret (donne un bonus de portée d'attaque           aux archers)
+        - Foret (donne un bonus de portée d'attaque aux archers)
         - Marécage (donne un malus de mouvements              aux troupes)
         - Rivière (le transport se fait qu'en                 bateau)
         - Plaine (à compléter)
