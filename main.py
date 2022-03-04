@@ -1,11 +1,11 @@
 import tkinter as tk
 import random
 from mapgen import arr
-from functools import partial
 
 #Initialisation Tkinter
 root = tk.Tk()
-root.title("Monotolia")
+root.title("Monotolia / Tour Bleu")
+redTurn = False
 #Fonction RGB pour Tkinter
 def rgb(rgb):
     return "#%02x%02x%02x" % rgb
@@ -25,7 +25,6 @@ for i,row in enumerate(arr):
         L.bind('<Button-1>',lambda e, i=i,j=j: on_click(i,j,e))
 lastPixel = root.winfo_children()[-1]
 troops=[]
-#il faudrait implémenter le système des équipes, équipe bleu, équipe rouge
 
 from sprites import (cavalierrouge,cavalierbleu,epeistebleu,epeisterouge,archerbleu,archerrouge,bateaubleu,bateaurouge, cb)
 #cliked = True quand l'user a cliqué sur une troop et la range s'affiche
@@ -50,36 +49,41 @@ for c in range(-3,4):
   for v in range (-3,4):
     rangeList.append((c,v))
 rangeList.remove((0,0))
+
+
 def troop_click(i,j,label):
-  #Variables Globales
-  global clicked
-  global toDestroy
   #On localise quelle troupe c'est dans la liste troops a partir du label
   for b in troops:
       if b[0]==label:
           curr_index = troops.index(b)
-  curr_classe = troops[curr_index][3]
-  #On a cliqué sur une troop donc clicked = true
-  clicked = True
-  #On enlève les potentiels pixels de rnage précédents
-  for a in toDestroy:
-    a.destroy()
-  print("Clic sur une troupe en",i,j)
-  toDestroy=[]
-  #Création des pixels de range / On leur attribue un bouton qui apelle MoveTroop
-  for pix in range(len(rangeList)):
-    def make_lambda(x):
-        return lambda ev:MoveTroop(curr_index,x)
-    print("pixelc")
-    newLabel = tk.Label(root,text='    ',bg=rgb((28,28,16)), image=cb)
-    newLabel.grid(row=i+rangeList[pix][0],column=j+rangeList[pix][1])
-    toDestroy.append(newLabel)
-    newLabel.bind('<Button-1>', make_lambda(rangeList[pix]))
-    newLabel.lower()  
-    newLabel.lift(lastPixel)
-    print('LFG')
+  if (redTurn and troops[curr_index][4] == "rouge") or (redTurn==False and troops[curr_index][4] == "bleu"):
+    #Variables Globales
+    global clicked
+    global toDestroy
+    curr_classe = troops[curr_index][3]
+    #On a cliqué sur une troop donc clicked = true
+    clicked = True
+    #On enlève les potentiels pixels de range précédents
+    for a in toDestroy:
+      a.destroy()
+    print("Clic sur une troupe en",i,j)
+    toDestroy=[]
+    #Création des pixels de range / On leur attribue un bouton qui apelle MoveTroop
+    for pix in range(len(rangeList)):
+      
+      
+      def make_lambda(x):
+          return lambda ev:MoveTroop(curr_index,x)
+      print("pixelc")
+      newLabel = tk.Label(root,text='    ',bg=rgb((28,28,16)), image=cb)
+      newLabel.grid(row=i+rangeList[pix][0],column=j+rangeList[pix][1])
+      toDestroy.append(newLabel)
+      newLabel.bind('<Button-1>', make_lambda(rangeList[pix]))
+      newLabel.lower()  
+      newLabel.lift(lastPixel)
+      print('LFG')
+
   
-  # en fait ca crée les pixels mais ca donne la meme direction a tout leur boutons
 
 def placeTroop(i,j,classe,equipe):
   #Méthode à appeler au début de game ou achat d'une troop (prendra en compte la classe plus tard)
@@ -114,7 +118,7 @@ def placeTroop(i,j,classe,equipe):
 
 def MoveTroop(i,dir):
   global clicked
-
+  global redTurn
   #Méthode pour bouger une troop avec son index dans la liste troops et la direction
   curr_label = troops[i][0]
   curr_ipos = troops[i][1]
@@ -154,18 +158,30 @@ def MoveTroop(i,dir):
   for i in toDestroy:
       i.destroy()  
 
-"""
-#Génération de troupes de l'équipe bleu
-for k in range(6):
-  teamblue = random.randint(0, 10)
-  pass
-"""
+  if redTurn == False:
+    redTurn = True
+    root.title("Monotolia / Tour Rouge")
+  else:
+    redTurn=False
+    root.title("Monotolia / Tour Bleu")
+
+
+
     
-#Tests
-placeTroop(5,5,"Archer",'bleu')
-placeTroop(10,10,"Cavalier", 'bleu')
-placeTroop(7,9,"Bateau", 'rouge')
-placeTroop(7,11,"Epeiste", 'rouge')
+#Génération de troupes de l'équipe bleu
+troupededépart = ["Archer", "Archer", "Cavalier", "Epeiste", "Epeiste", "Bateau"]
+equipe = "bleu"
+for k in range(len(troupededépart)):
+  icord = random.randint(5,15)
+  jcord = random.randint(5,15)
+  placeTroop(icord, jcord, troupededépart[k], equipe)
+
+#Génération de troupes de l'équipe rouge
+equipe = "rouge"
+for k in range(len(troupededépart)):
+  icord = random.randint(30,40)
+  jcord = random.randint(30,40)
+  placeTroop(icord,jcord,troupededépart[k], equipe)
 
 #Loop tkinter
 root.mainloop()
