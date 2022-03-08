@@ -1,8 +1,11 @@
 from PIL import ImageTk, Image
 
+#Ouverture des sprites e transformations en objets avec une méthode Tkinter pour les rendre utilisables par la suite dans le jeu
 
 cb = Image.open("static/carrejaune.png")
 cb = ImageTk.PhotoImage(cb)
+cr = Image.open("static/CarréRose.png")
+cr = ImageTk.PhotoImage(cr)
 
 archerbleu = Image.open("static/ArcherBlueSide.png")
 archerbleu = ImageTk.PhotoImage(archerbleu)

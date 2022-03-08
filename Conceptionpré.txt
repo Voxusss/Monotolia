@@ -13,7 +13,7 @@ Le terrain se fait sur une génération de map aléatoire et qui suit une certai
 
         - Foret (donne un bonus de portée d'attaque aux archers)
         - Marécage (donne un malus de mouvements              aux troupes)
-        - Rivière (le transport se fait qu'en                 bateau)
+        - Rivière
         - Plaine (à compléter)
 
 1) Début:
